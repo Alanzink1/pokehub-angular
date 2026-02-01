@@ -35,8 +35,6 @@ export class PokemonList implements OnInit {
 
   selectPokemon(pokemon: any) {
     this.selectedPokemon.set(pokemon);
-    // this.audio = new Audio(pokemon.cries.legacy);
-    // this.audio.play();
   }
 
 

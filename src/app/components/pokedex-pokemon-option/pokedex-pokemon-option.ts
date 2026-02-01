@@ -21,7 +21,6 @@ export class PokedexPokemonOption implements OnInit {
     effect(() => {
       const active = this.isActive();
 
-      // só dispara quando muda de false -> true
       if (active && !this.wasActive) {
         this.playAudio();
       }
@@ -35,6 +34,7 @@ export class PokedexPokemonOption implements OnInit {
       this.pokemonService.getPokemonByUrl(this.url()).subscribe({
         next: (data: any) => {
           this.pokemon = data;
+          this.pokemon.name = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);
         },
         error: (err) => console.error('Erro ao carregar dados do pokémon:', err)
       });
