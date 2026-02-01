@@ -1,12 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { PokedexScreen } from '../../components/pokedex-screen/pokedex-screen';
-import { PokedexPokemonOption } from '../../components/pokedex-pokemon-option/pokedex-pokemon-option';
 import { PokemonList } from '../../components/pokemon-list/pokemon-list';
 import { HttpDataClient } from '../../services/http-data-client';
+import { PokedexPokemonInfo } from '../../components/pokedex-pokemon-info/pokedex-pokemon-info';
 
 @Component({
   selector: 'app-home',
   imports: [
+    PokedexPokemonInfo,
     PokedexScreen,
     PokemonList
   ],

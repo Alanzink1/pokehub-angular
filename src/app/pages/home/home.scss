@@ -6,6 +6,12 @@
   background: linear-gradient(to bottom, #79a0e3, #79a0e3 3%, #668cd7 4% 12%, #79a0e3 13% 14%, #5576c5 15% 20%, #79a0e3 21% 23%, #4c69b8 25% 28%, #79a0e3 30% 35%, #4660b4 36% 38%, #79a0e3 40% 60%, #668cd7 64% 78%, #79a0e3 79% 80%, #5576c5 81% 86%, #79a0e3 87% 89%, #4c69b8 91% 94%, #79a0e3 96% 97%, #4660b4 98% 99%, #79a0e3);
 }
 
+#info-container {
+  position: absolute;
+  left: 0;
+  z-index: 9;
+}
+
 .container{
   width: min(1200px, 96vw);
   display: grid;

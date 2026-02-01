@@ -16,6 +16,7 @@ import { HttpDataClient } from '../../services/http-data-client';
   styleUrl: './pokedex-pokemon-option.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class PokedexPokemonOption {
   private readonly pokemonService = inject(HttpDataClient);
 
@@ -25,14 +26,11 @@ export class PokedexPokemonOption {
   url = input<string>('');
   isActive = input<boolean>(false);
 
-  // ✅ AGORA É SIGNAL (tem .set e é lido com pokemon())
   pokemon = signal<any | null>(null);
 
-  // (opcional) evita string e deixa simples
   cardClass = computed(() => (this.isActive() ? 'option-selected' : ''));
 
   constructor() {
-    // ✅ Busca quando url() mudar
     effect(() => {
       const u = this.url();
       if (!u) {
@@ -47,14 +45,12 @@ export class PokedexPokemonOption {
             name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
           };
 
-          // ✅ evita NG0100/hydration: seta no próximo microtask
           queueMicrotask(() => this.pokemon.set(formatted));
         },
         error: (err) => console.error('Erro ao carregar dados do pokémon:', err),
       });
     });
 
-    // ✅ Som quando vira ativo (sem mexer no template)
     effect(() => {
       const active = this.isActive();
       if (active && !this.wasActive) this.playAudio();
@@ -63,7 +59,6 @@ export class PokedexPokemonOption {
   }
 
   onClick() {
-  // se quiser tocar só quando estiver ativo:
   if (!this.isActive()) return;
   this.playAudio();
 }

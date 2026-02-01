@@ -1,0 +1,212 @@
+.container-info {
+  height: 85vh;
+  width: 202vh;
+  position: absolute;
+  top: -43vh;
+  transform: translateX(-194.5vh);
+  transition: transform 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  background-color: #faeab2;
+  border-radius: 0 16px 16px 0;
+  cursor: pointer;
+}
+
+.container-info.show {
+  display: relative;
+  transform: translateX(0);
+
+  .arrow-container img {
+    transform: rotate(180deg);
+  }
+}
+
+.arrow-container {
+  position: absolute;
+  right: 0.5%;
+  top: 45%;
+  img {
+    transition: transform 0.2s ease-out;
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+.header-info {
+  height: 13%;
+  width: 96.3%;
+  background-color: #bfc3ce;
+  background-image: linear-gradient(45deg, #c3c5c4 25%, transparent 25%, transparent 75%, #c3c5c4 75%, #c3c5c4), linear-gradient(-45deg, #c3c5c4 25%, transparent 25%, transparent 75%, #c3c5c4 75%, #c3c5c4);
+  background-size: 20px 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+  box-sizing: border-box;
+}
+
+.middle-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50%;
+  width: 35%;
+  padding-left: 60%;
+  padding-right: 20px;
+  background-color: #d3ecf6;
+  background-image: linear-gradient(45deg, #c4e8f8 25%, transparent 25%, transparent 75%, #c4e8f8 75%, #c4e8f8), linear-gradient(-45deg, #c4e8f8 25%, transparent 25%, transparent 75%, #c4e8f8 75%, #c4e8f8);
+  background-size: 20px 20px;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 40%;
+  width: 35%;
+  padding-left: 60%;
+  padding-right: 20px;
+  background-color: #d3ecf6;
+  background-size: 20px 20px;
+  background: repeating-linear-gradient(0deg, #cce486, #cce486 2px, #bfd678 2px 4px);
+}
+
+.p-button {
+  display: inline-block;
+  background-color: #67bcea;
+  border-radius: 5px;
+  color: #f0fbff;
+  padding: 5px 20px;
+  font-size: x-large !important;
+  width: 100px;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.infos {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+  align-items: center;
+
+  p {
+    font-size: large;
+  }
+
+  .container-types {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .p-value {
+  display: inline-block;
+  background-color: #6E6B67;
+  border-radius: 5px;
+  color: #f0fbff;
+  padding: 2px 2px;
+  font-size: 1.3rem !important;
+  width: 100px;
+  text-align: center;
+  }
+}
+
+.card-description {
+  background-color: #f8f7db;
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+  border-radius: 10px;
+  height: 70%;
+
+  div {
+    background-color: #daeac4;
+    height: 90%;
+    margin: 10px 5px 5px;
+  }
+
+  p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+  }
+}
+
+.grass {
+  background-color: #bfd678 !important;
+}
+
+.bug {
+  background-color: #9ad678 !important;
+}
+
+.flying {
+  background-color: #fdfdfd !important;
+  color: black !important;
+}
+
+.fire {
+  background-color: #f28c28 !important;
+}
+
+.fighting {
+  background-color: #a35f1b !important;
+}
+
+.poison {
+  background-color: #5e28f2 !important;
+}
+
+.ground {
+  background-color: #4b030c !important;
+}
+
+.fairy {
+  background-color: #ac149f !important;
+}
+
+.water {
+  background-color: #284df2 !important;
+}
+
+.rock {
+  background-color: #333335 !important;
+}
+
+.ghost {
+  background-color: #b9b9b9 !important;
+}
+
+.steel {
+  background-color: #4c4e53 !important;
+}
+
+.electric {
+  background-color: #d7da26 !important;
+}
+
+.psychic {
+  background-color: #d1d415 !important;
+}
+
+.ice {
+  background-color: #28d4f2 !important;
+}
+
+.dragon {
+  background-color: #f28328 !important;
+}
+
+.dark {
+  background-color: #20093f !important;
+}
+
+.stellar {
+  background-color: #eb28f2 !important;
+}
+
+.unknown {
+  background-color: #000000 !important;
+}
