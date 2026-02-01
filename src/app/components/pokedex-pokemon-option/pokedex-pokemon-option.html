@@ -1,5 +1,7 @@
-<li id="container-pokemon-option">
+<li [class]="cardClass()" id="container-pokemon-option">
     <div id="checkbox"></div>
-    <img src="images/bulbasaur.png" alt="bulbasaur">
-    <p>No. 1 Bulbasaur</p>
+    @if (pokemon) {
+      <img [src]="pokemon.sprites.versions['generation-v']['black-white'].front_default" [alt]="pokemon.name">
+      <p>No. {{ pokemon.id }} {{ pokemon.name }}</p>
+    }
 </li>

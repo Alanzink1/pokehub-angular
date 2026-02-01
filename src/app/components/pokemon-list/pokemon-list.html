@@ -1,28 +1,9 @@
 <div class="container-list">
   <ul>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
-    <div id="poke-option">
-      <app-pokedex-pokemon-option></app-pokedex-pokemon-option>
-    </div>
+    @for (pokemon of pokemonList; track pokemon.name) {
+      <div id="poke-option" [class.option-selected]="selectedPokemon()?.name === pokemon.name" (click)="selectPokemon(pokemon)">
+        <app-pokedex-pokemon-option [url]="pokemon.url" [isActive]="selectedPokemon()?.name === pokemon.name"></app-pokedex-pokemon-option>
+      </div>
+    }
   </ul>
 </div>
