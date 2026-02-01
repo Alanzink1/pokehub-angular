@@ -18,7 +18,7 @@ main {
 header {
   width: 100%;
   height: 5em;
-  background-color: #6788ff;
+  background-color: #7594e9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,33 +48,17 @@ header {
   }
 }
 
-#container-github {
-  background-color: #0e94c9;
-  border: 2px solid #0ec3c9;
-  padding: 0 0.5em;
-  border-radius: 3em;
-  margin-left: 1em;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-
-  h2 {
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-  }
-}
-
 main {
   flex: 1;
   display: block;
+  overflow: hidden;
 }
 
 footer {
   width: 100%;
   height: 4em;
-  background-color: #6788ff;
-
+  background-color: #7594e9;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
 }

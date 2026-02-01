@@ -15,9 +15,7 @@ import { HttpDataClient } from '../../services/http-data-client';
 })
 export class HomePage implements OnInit {
 
-  private readonly pokemonService = inject(HttpDataClient
-
-  )
+  private readonly pokemonService = inject(HttpDataClient);
   readonly limit = 50;
   audio: any;
   currentOffset = 0;
@@ -37,6 +35,10 @@ export class HomePage implements OnInit {
       },
       error: (err) => console.error('Erro ao carregar pokémon:', err)
     })
+  }
+
+  onNearEnd() {
+    this.loadMore();
   }
 
   selectPokemon(pokemon: any) {

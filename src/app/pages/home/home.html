@@ -5,7 +5,8 @@
       <app-pokemon-list
         [pokemonList]="pokemonList"
         [selectedPokemonName]="selectedPokemon()?.name"
-        (pokemonSelected)="selectPokemon($event)">
+        (pokemonSelected)="selectPokemon($event)"
+        (nearEnd)="onNearEnd()">
       </app-pokemon-list>
   </div>
 </div>
