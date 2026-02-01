@@ -1,3 +1,20 @@
+:host {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: block;
+}
+
+#github-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 header {
   width: 100%;
   height: 5em;
@@ -5,29 +22,29 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-#container-title{
-  background-color: #0e94c9;
-  border: 2px solid #0ec3c9;
-  padding: 0 0.5em;
-  border-radius: 3em;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
+  #container-title{
+    background-color: #0e94c9;
+    border: 2px solid #0ec3c9;
+    padding: 0 0.5em;
+    border-radius: 3em;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 
-  img {
-    max-height: 50px;
-    max-width: 50px;
-  }
+    img {
+      max-height: 50px;
+      max-width: 50px;
+    }
 
-  h2 {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    -webkit-text-stroke: 0.2px #0e84c9;
-    color: white;
-    font-weight: bold;
-    font-size: 2.5em;
+    h2 {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      -webkit-text-stroke: 0.2px #0e84c9;
+      color: white;
+      font-weight: bold;
+      font-size: 2.5em;
+    }
   }
 }
 
@@ -46,4 +63,80 @@ header {
     font-weight: bold;
     color: white;
   }
+}
+
+main {
+  flex: 1;
+  display: block;
+}
+
+footer {
+  width: 100%;
+  height: 4em;
+  background-color: #6788ff;
+
+  display: flex;
+  align-items: center;
+}
+
+.footer-content {
+  width: 100%;
+  padding: 0 1.5em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.footer-right {
+  gap: 1.2em;
+}
+
+.footer-left img {
+  width: 50px;
+  height: 50px;
+}
+
+footer p {
+  margin: 0;
+  color: white;
+  font-size: 1em;
+}
+
+.key {
+  background-color: #6f6b65;
+  color: white;
+  font-weight: bold;
+
+  height: 2em;
+  padding: 0 0.9em;
+  border-radius: 0.35em;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.key--space {
+  min-width: 4.8em;
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
