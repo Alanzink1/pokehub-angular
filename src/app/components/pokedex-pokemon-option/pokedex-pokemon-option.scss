@@ -1,0 +1,16 @@
+#checkbox {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #dacd9c;
+  margin-left: 0.5em;
+}
+
+#container-pokemon-option {
+  background-color: #faeab2;
+  height: 4em;
+  border-radius: 70px 8px 8px 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
