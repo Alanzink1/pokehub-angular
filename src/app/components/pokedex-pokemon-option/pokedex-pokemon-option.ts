@@ -65,18 +65,17 @@ export class PokedexPokemonOption {
 
 
   playAudio() {
-  const p = this.pokemon();
-  const cry = p?.cries?.latest || p?.cries?.legacy;
-  if (!cry) return;
+    const p = this.pokemon();
+    const cry = p?.cries?.latest || p?.cries?.legacy;
+    if (!cry) return;
 
-  if (this.audio) {
-    this.audio.pause();
-    this.audio.currentTime = 0;
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    }
+
+    this.audio = new Audio(cry);
+    this.audio.volume = 0.1;
+    this.audio.play().catch(() => {});
   }
-
-  this.audio = new Audio(cry);
-  this.audio.volume = 0.1;
-  this.audio.play().catch(() => {});
-}
-
 }

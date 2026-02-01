@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   results: any[] = [];
   pokemonList: any[] = [];
   selectedPokemon = signal<any | null>(null);
+  showTable = false;
 
   ngOnInit() {
     this.loadMore();
@@ -36,6 +37,10 @@ export class HomePage implements OnInit {
       },
       error: (err) => console.error('Erro ao carregar pokémon:', err)
     })
+  }
+
+  onInfoOpenedChange(value: boolean) {
+    this.showTable = value;
   }
 
   onNearEnd() {

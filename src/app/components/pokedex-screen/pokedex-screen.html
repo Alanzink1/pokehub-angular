@@ -1,4 +1,4 @@
-<div id="container-pokemon">
+<div class="container-pokemon" [class.is-opened]="opened()">
   @if (pokemon() && pokemon().sprites) {
     <img
       [src]="pokemon().sprites.versions?.['generation-v']?.['black-white']?.animated.front_default"

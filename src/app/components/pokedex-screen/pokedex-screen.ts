@@ -8,4 +8,5 @@ import { Component, input } from '@angular/core';
 })
 export class PokedexScreen {
   pokemon = input<any>();
+  opened = input<boolean>(false);
 }
