@@ -13,6 +13,7 @@ import { PokedexPokemonOption } from '../pokedex-pokemon-option/pokedex-pokemon-
 export class PokemonList implements OnInit {
   private readonly pokemonService = inject(HttpDataClient)
   readonly limit = 50;
+  audio: any;
   currentOffset = 0;
   results: any[] = [];
   pokemonList: any[] = [];
@@ -34,7 +35,8 @@ export class PokemonList implements OnInit {
 
   selectPokemon(pokemon: any) {
     this.selectedPokemon.set(pokemon);
-    console.log('Pokémon selecionado:', pokemon);
+    // this.audio = new Audio(pokemon.cries.legacy);
+    // this.audio.play();
   }
 
 

@@ -1,4 +1,4 @@
-<li [class]="cardClass()" id="container-pokemon-option">
+<li [class]="cardClass()" (click)="onClick()" id="container-pokemon-option">
     <div id="checkbox"></div>
     @if (pokemon) {
       <img [src]="pokemon.sprites.versions['generation-v']['black-white'].front_default" [alt]="pokemon.name">
