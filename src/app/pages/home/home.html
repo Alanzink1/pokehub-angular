@@ -1,0 +1,25 @@
+<div id="background">
+  <div class="container">
+    <div id="info-container">
+      <app-pokedex-pokemon-info
+        [pokemon]="selectedPokemon()"
+        [opened]="showTable"
+        (openedChange)="onInfoOpenedChange($event)">
+      </app-pokedex-pokemon-info>
+    </div>
+
+
+
+    <app-pokedex-screen
+      [pokemon]="selectedPokemon()"
+      [opened]="showTable">
+    </app-pokedex-screen>
+
+    <app-pokemon-list
+      [pokemonList]="pokemonList"
+      [selectedPokemonName]="selectedPokemon()?.name"
+      (pokemonSelected)="selectPokemon($event)"
+      (nearEnd)="onNearEnd()">
+    </app-pokemon-list>
+  </div>
+</div>

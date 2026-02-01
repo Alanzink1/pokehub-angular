@@ -1,0 +1,58 @@
+.poke-option {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 0 5px 3em;
+  border-radius: 12px;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.option-selected {
+  background: linear-gradient(
+    90deg,
+    #ff4425,
+    #ff8c3a
+  );
+}
+
+.container-list {
+  height: 560px;
+  max-height: calc(420px * 9);
+  width: 130%;
+  overflow-y: auto;
+}
+
+.container-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container-list::-webkit-scrollbar-thumb {
+  background-color: #e9563d;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 2px #882a1a;
+  background-clip: padding-box;
+}
+
+.container-list::-webkit-scrollbar-track {
+  border: solid #90ace7 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    #276d83,
+    #276d83 5px,
+    #1c4760 7px 9px
+  );
+}
+
+.arrow-icon-active {
+  position: absolute;
+  left: 25px;
+  top: 28px;
+  width: 20px;
+  height: 20px;
+}
+
+.arrow-icon-inative {
+  display: none;
+}
+

@@ -1,0 +1,9 @@
+<div class="container-pokemon" [class.is-opened]="opened()">
+  @if (pokemon() && pokemon().sprites) {
+    <img
+      [src]="pokemon().sprites.versions?.['generation-v']?.['black-white']?.animated.front_default"
+      [alt]="pokemon().name">
+  } @else {
+    <img id="container-logo" src="/images/pokehub.png" alt="Pokéball">
+  }
+</div>

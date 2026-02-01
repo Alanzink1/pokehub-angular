@@ -1,0 +1,24 @@
+<div class="container-list" (scroll)="onScroll($event)">
+  <ul>
+    @for (pokemon of pokemonList(); track pokemon.name) {
+      <div
+        class="poke-option"
+        [class.option-selected]="selectedPokemonName() === pokemon.name"
+        (click)="pokemonSelected.emit(pokemon)"
+      >
+        <img
+          src="images/arrow.png"
+          alt="arrow"
+          [class]="selectedPokemonName() === pokemon.name
+            ? 'arrow-icon-active'
+            : 'arrow-icon-inative'"
+        >
+
+        <app-pokedex-pokemon-option
+          [url]="pokemon.url"
+          [isActive]="selectedPokemonName() === pokemon.name">
+        </app-pokedex-pokemon-option>
+      </div>
+    }
+  </ul>
+</div>

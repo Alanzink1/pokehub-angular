@@ -1,0 +1,46 @@
+<div class="container-info"
+     [class.overlay]="opened()"
+     [class.show]="opened()"
+     (click)="toggleTable()">
+
+  <div class="arrow-container" (click)="toggleTable(); $event.stopPropagation()">
+    <img src="/images/arrow.png" alt="arrow">
+  </div>
+
+  <div class="header-info">
+    <app-pokedex-pokemon-option
+          [url]="`${baseUrl}/${pokemon()!.id}`"
+          [isActive]="true">
+    </app-pokedex-pokemon-option>
+  </div>
+
+  <div class="middle-info">
+    <div class="infos">
+      <p class="p-button">Tipo</p>
+
+      <div class="container-types">
+        @for (type of types(); track type.type.name) {
+          <p class="p-value" [class]="type.type.name">{{ type.type.name }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="infos">
+      <p class="p-button">Altura</p>
+      <p>{{ heightM() }}m</p>
+    </div>
+
+    <div class="infos">
+      <p class="p-button">Peso</p>
+      <p>{{ weightKg() }}kg</p>
+    </div>
+  </div>
+
+  <div class="footer-info">
+    <div class="card-description">
+      <div></div>
+      <p>{{ flavorText() }}</p>
+      <div></div>
+    </div>
+  </div>
+</div>
