@@ -1,0 +1,39 @@
+#poke-option {
+  width: 96%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  border-radius: 8px;
+}
+
+.option-selected {
+  background-color: #ff4425;
+}
+
+.container-list {
+  max-height: calc(65px * 9);
+  width: 120%;
+  overflow-y: auto;
+}
+
+.container-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container-list::-webkit-scrollbar-thumb {
+  background-color: #e9563d;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 2px #882a1a;
+  background-clip: padding-box;
+}
+
+.container-list::-webkit-scrollbar-track {
+  border: solid #90ace7 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    #276d83,
+    #276d83 5px,
+    #1c4760 7px 9px
+  );
+}
