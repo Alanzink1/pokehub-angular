@@ -1,6 +1,11 @@
 <div id="background">
   <div class="container">
-      <app-pokedex-screen></app-pokedex-screen>
-      <app-pokemon-list></app-pokemon-list>
+      <app-pokedex-screen [pokemon]="selectedPokemon()"></app-pokedex-screen>
+
+      <app-pokemon-list
+        [pokemonList]="pokemonList"
+        [selectedPokemonName]="selectedPokemon()?.name"
+        (pokemonSelected)="selectPokemon($event)">
+      </app-pokemon-list>
   </div>
 </div>

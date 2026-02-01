@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-pokedex-screen',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './pokedex-screen.scss',
 })
 export class PokedexScreen {
-
+  pokemon = input<any>();
 }

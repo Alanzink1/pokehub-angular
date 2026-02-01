@@ -1,1 +1,9 @@
-<div id="container-pokemon"></div>
+<div id="container-pokemon">
+  @if (pokemon() && pokemon().sprites) {
+    <img
+      [src]="pokemon().sprites.versions?.['generation-v']?.['black-white']?.animated.front_default"
+      [alt]="pokemon().name">
+  } @else {
+    <img src="/images/unknown.png" alt="Pokéball">
+  }
+</div>

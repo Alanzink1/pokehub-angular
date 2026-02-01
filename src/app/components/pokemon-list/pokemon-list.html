@@ -1,8 +1,12 @@
 <div class="container-list">
   <ul>
-    @for (pokemon of pokemonList; track pokemon.name) {
-      <div id="poke-option" [class.option-selected]="selectedPokemon()?.name === pokemon.name" (click)="selectPokemon(pokemon)">
-        <app-pokedex-pokemon-option [url]="pokemon.url" [isActive]="selectedPokemon()?.name === pokemon.name"></app-pokedex-pokemon-option>
+    @for (pokemon of pokemonList(); track pokemon.name) {
+      <div id="poke-option" (click)="pokemonSelected.emit(pokemon)">
+        <app-pokedex-pokemon-option
+          [url]="pokemon.url"
+          [isActive]="selectedPokemonName() === pokemon.name">
+        </app-pokedex-pokemon-option>
+
       </div>
     }
   </ul>

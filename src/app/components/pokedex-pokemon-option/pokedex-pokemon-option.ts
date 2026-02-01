@@ -1,65 +1,87 @@
-import { Component, computed, effect, inject, input, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { HttpDataClient } from '../../services/http-data-client';
 
 @Component({
   selector: 'app-pokedex-pokemon-option',
-  imports: [],
+  standalone: true,
   templateUrl: './pokedex-pokemon-option.html',
   styleUrl: './pokedex-pokemon-option.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PokedexPokemonOption implements OnInit {
-  private readonly pokemonService = inject(HttpDataClient)
+export class PokedexPokemonOption {
+  private readonly pokemonService = inject(HttpDataClient);
+
   private audio?: HTMLAudioElement;
   private wasActive = false;
+
   url = input<string>('');
   isActive = input<boolean>(false);
 
-  cardClass = computed(() => this.isActive() ? 'option-selected' : '');
-  pokemon: any;
+  // ✅ AGORA É SIGNAL (tem .set e é lido com pokemon())
+  pokemon = signal<any | null>(null);
+
+  // (opcional) evita string e deixa simples
+  cardClass = computed(() => (this.isActive() ? 'option-selected' : ''));
 
   constructor() {
+    // ✅ Busca quando url() mudar
     effect(() => {
-      const active = this.isActive();
-
-      if (active && !this.wasActive) {
-        this.playAudio();
+      const u = this.url();
+      if (!u) {
+        this.pokemon.set(null);
+        return;
       }
 
+      this.pokemonService.getPokemonByUrl(u).subscribe({
+        next: (data: any) => {
+          const formatted = {
+            ...data,
+            name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
+          };
+
+          // ✅ evita NG0100/hydration: seta no próximo microtask
+          queueMicrotask(() => this.pokemon.set(formatted));
+        },
+        error: (err) => console.error('Erro ao carregar dados do pokémon:', err),
+      });
+    });
+
+    // ✅ Som quando vira ativo (sem mexer no template)
+    effect(() => {
+      const active = this.isActive();
+      if (active && !this.wasActive) this.playAudio();
       this.wasActive = active;
     });
   }
 
-  ngOnInit() {
-    if (this.url) {
-      this.pokemonService.getPokemonByUrl(this.url()).subscribe({
-        next: (data: any) => {
-          this.pokemon = data;
-          this.pokemon.name = this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1);
-        },
-        error: (err) => console.error('Erro ao carregar dados do pokémon:', err)
-      });
-    }
-  }
-
   onClick() {
-    if (!this.isActive()) return;
+  // se quiser tocar só quando estiver ativo:
+  if (!this.isActive()) return;
+  this.playAudio();
+}
 
-    this.playAudio();
-  }
 
   playAudio() {
-    const cry = this.pokemon?.cries?.latest || this.pokemon?.cries?.legacy;
-    if (!cry) return;
+  const p = this.pokemon();
+  const cry = p?.cries?.latest || p?.cries?.legacy;
+  if (!cry) return;
 
-    if (this.audio) {
-      this.audio.pause();
-      this.audio.currentTime = 0;
-    }
-
-    this.audio = new Audio(cry);
-    this.audio.volume = 0.1;
-    this.audio.play().catch(() => {
-    });
+  if (this.audio) {
+    this.audio.pause();
+    this.audio.currentTime = 0;
   }
+
+  this.audio = new Audio(cry);
+  this.audio.volume = 0.1;
+  this.audio.play().catch(() => {});
+}
 
 }
