@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 #background{
   min-height: calc(95.4vh - 103px);
   display: flex;
@@ -17,4 +23,80 @@
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   align-items: center;
+}
+
+
+@media (max-width: 768px) and (orientation: landscape) {
+  :host {
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+  }
+  
+  #background {
+    height: 100%;
+    min-height: 0;
+    max-height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    gap: 0.2em;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: stretch;
+    overflow: hidden;
+    box-sizing: border-box;
+    position: relative;
+    margin: 0;
+    padding: 0.2em;
+  }
+  
+  
+  app-pokedex-screen {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0.1em;
+    box-sizing: border-box;
+  }
+  
+  app-pokemon-list {
+    display: flex !important;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #info-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    max-height: 100%;
+    width: auto;
+  }
 }
