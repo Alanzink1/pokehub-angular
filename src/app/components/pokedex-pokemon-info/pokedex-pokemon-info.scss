@@ -215,3 +215,132 @@
 .unknown {
   background-color: #000000 !important;
 }
+
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .container-info {
+    height: 100%;
+    max-height: 100%;
+    width: 40vw;
+    max-width: 40vw;
+    min-width: 200px;
+    top: 0;
+    left: 0;
+    
+    transform: translateX(calc(-40vw + 3vw));
+    transition: transform 0.3s ease-out;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: #faeab2; 
+  }
+
+  .container-info.show {
+    transform: translateX(0) !important;
+    background-color: #faeab2; 
+  }
+
+  .arrow-container {
+    right: -0.8%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+
+    img {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .header-info {
+    height: 15%;
+    width: 92.5%;
+    font-size: 0.65em;
+    padding-left: 0.5em;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .middle-info {
+    height: 45%;
+    width: 92.5%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3em;
+  }
+
+  .footer-info {
+    height: 40%;
+    width: 92.5%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .p-button {
+    font-size: 1.2em !important;
+    padding: 1px 10px !important;
+    width: 80px !important;
+    margin-right: 8px !important ;
+    box-sizing: border-box;
+  }
+
+  .p-value {
+    font-size: 0.1em !important;
+    padding: 0.2px 1px !important;
+    width: 80px !important;
+    box-sizing: border-box;
+  }
+
+  .infos {
+    margin-bottom: 0.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3em;
+
+    p {
+      font-size: 1em;
+      margin: 0;
+    }
+  }
+
+  .container-types {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+  }
+
+  .card-description {
+    height: 85%;
+    margin: 0;
+    padding: 0.3em;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 15px 1fr 15px;
+
+    div {
+      margin: 5px 3px;
+      height: 90%;
+      box-sizing: border-box;
+    }
+
+    p {
+      font-size: 0.6em;
+      padding: 0.3em;
+      margin: 0;
+      overflow-y: auto;
+      word-wrap: break-word;
+      line-height: 1.4;
+      box-sizing: border-box;
+    }
+  }
+}
