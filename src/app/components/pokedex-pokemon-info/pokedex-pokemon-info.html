@@ -1,5 +1,6 @@
 <div class="container-info"
      [class.overlay]="opened()"
+     [class.appear]="pokemon() !== null"
      [class.show]="opened()"
      (click)="toggleTable()">
 

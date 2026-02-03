@@ -22,6 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.toggleMusic();
+
     if (!this.isBrowser) {
       return;
     }
@@ -85,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     const isMobile = screenWidth <= 768;
 
-    
+
     const shouldShowWarning = isMobile && isPortrait;
 
     this.showOrientationWarning.set(shouldShowWarning);
@@ -117,7 +119,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const musicName = this.musics[randomIndex];
 
     this.audio = new Audio(`musics/${musicName}.mp3`);
-    this.audio.volume = 0.1;
+    this.audio.volume = 0.03;
     this.audio.play().catch(() => {});
   }
 

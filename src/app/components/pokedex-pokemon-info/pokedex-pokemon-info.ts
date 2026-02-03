@@ -16,7 +16,7 @@ export class PokedexPokemonInfo {
   opened = input<boolean>(false);
   openedChange = output<boolean>();
   baseUrl = 'https://pokeapi.co/api/v2/pokemon';
-  
+
   pokeUrl = computed(() => {
     const id = this.pokemon()?.id;
     return id != null ? `${this.baseUrl}/${id}` : '';
