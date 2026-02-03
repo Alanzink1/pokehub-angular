@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
 
   private readonly pokemonService = inject(HttpDataClient);
   readonly limit = 50;
-  audio: any;
+  audio?: HTMLAudioElement;
   currentOffset = 0;
   results: any[] = [];
   pokemonList: any[] = [];
