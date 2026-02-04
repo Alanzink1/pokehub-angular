@@ -1,0 +1,92 @@
+#poke-container {
+  cursor: pointer;
+  width: 100vh;
+  height: 12vh;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  background-color: #63c4f1;
+  border-radius: 120px 16px 16px 120px;
+  margin-left: 64px;
+  margin-top: 46px;
+  border: 3px solid red;
+
+  #pokemon-img {
+    position: absolute;
+    image-rendering: pixelated;
+    width: 30vh;
+    z-index: 2;
+    left: 9vh;
+    top: -2.5vh;
+  }
+
+  #pokeball-img {
+    filter: contrast(110%);
+    width: 20vh;
+    height: 18vh;
+    margin-left: -9.2vh;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+#info-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text-container {
+  margin-right: 5vh;
+
+  display: flex;
+  flex-direction: column;
+  .up, .down {
+    width: 35px;
+    height: 30px;
+    cursor: pointer;
+  }
+}
+
+#container-hp{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+
+  margin-right: 12vh;
+  margin-top: 1vh;
+
+  p {
+    padding-right: 1vh;
+  }
+
+}
+
+#background-hp {
+  width: 25vh;
+  height: 3.6vh;
+  background-color: #000000;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  #hp-text {
+    color: rgb(223, 96, 45);
+    margin-left: 1.5vh;
+  }
+
+  #hp {
+    height: 2vh;
+    width: 18vh;
+    background-color: rgb(100, 235, 23);
+    border: 2px solid white;
+    border-radius: 16px;
+  }
+}

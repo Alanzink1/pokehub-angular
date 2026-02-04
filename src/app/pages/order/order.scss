@@ -8,12 +8,15 @@
 }
 
 #background-list {
-    width: 1200px;
+    width: 1050px;
     aspect-ratio: 1.5;
     margin-top: 1.5em;
     border-radius: 60px 0 0 0;
     background: repeating-linear-gradient(to bottom, #49A2A0, #48A09E 8px, #38908E 8px 15px);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     z-index: 12;
     transform: translate3d(0, 0, 0) scale(1);
     transform-origin: center center;
