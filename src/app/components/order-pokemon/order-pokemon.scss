@@ -1,92 +1,144 @@
+/* =========================
+   LISTA (container pai)
+   ========================= */
+
+#background {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#background-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 0;
+}
+
+/* =========================
+   CARD DO POKÉMON
+   ========================= */
+
 #poke-container {
   cursor: pointer;
-  width: 100vh;
+  width: 100%;
+  max-width: 90vw;
   height: 12vh;
+
   display: flex;
+  position: relative;
   flex-direction: row;
-  text-align: center;
   align-items: center;
+
   background-color: #63c4f1;
   border-radius: 120px 16px 16px 120px;
   margin-left: 64px;
-  margin-top: 46px;
+
   border: 3px solid red;
+
+  /* ===== Pokébola + Pokémon ===== */
+
+  #poke-ball-container {
+    position: relative;
+    width: 10vh;
+    height: 12vh;
+    flex-shrink: 0;
+  }
 
   #pokemon-img {
     position: absolute;
-    image-rendering: pixelated;
-    width: 30vh;
     z-index: 2;
-    left: 9vh;
-    top: -2.5vh;
+    width: 28vh;
+    left: -12vh;
+    bottom: -8vh;
+    image-rendering: pixelated;
+    pointer-events: none;
   }
 
   #pokeball-img {
-    filter: contrast(110%);
+    position: absolute;
+    z-index: 1;
     width: 20vh;
     height: 18vh;
-    margin-left: -9.2vh;
+    left: -10vh;
+    bottom: -3vh;
+    pointer-events: none;
   }
+
+  /* ===== Texto padrão ===== */
 
   p {
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
+    margin: 0;
   }
 }
+
+/* =========================
+   INFO (nome, hp, setas)
+   ========================= */
 
 #info-container {
   width: 100%;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  padding-right: 24px;
 }
 
-.text-container {
-  margin-right: 5vh;
+/* ===== Nome + Level ===== */
 
+.text-container {
   display: flex;
   flex-direction: column;
-  .up, .down {
+  gap: 4px;
+
+  &.arrows {
+    align-items: center;
+  }
+
+  .up,
+  .down {
     width: 35px;
     height: 30px;
     cursor: pointer;
+    image-rendering: pixelated;
   }
 }
 
-#container-hp{
+/* =========================
+   HP
+   ========================= */
+
+#container-hp {
   display: flex;
   flex-direction: column;
-  text-align: right;
-
-  margin-right: 12vh;
-  margin-top: 1vh;
-
-  p {
-    padding-right: 1vh;
-  }
-
+  align-items: flex-end;
+  gap: 4px;
 }
 
 #background-hp {
   width: 25vh;
   height: 3.6vh;
-  background-color: #000000;
+
+  background-color: #000;
   border-radius: 16px;
+
   display: flex;
-  flex-direction: row;
   align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+}
 
-  #hp-text {
-    color: rgb(223, 96, 45);
-    margin-left: 1.5vh;
-  }
+#hp-text {
+  color: rgb(223, 96, 45);
+  font-weight: bold;
+}
 
-  #hp {
-    height: 2vh;
-    width: 18vh;
-    background-color: rgb(100, 235, 23);
-    border: 2px solid white;
-    border-radius: 16px;
-  }
+#hp {
+  height: 2vh;
+  width: 18vh;
+  background-color: rgb(100, 235, 23);
+  border: 2px solid white;
+  border-radius: 16px;
 }
