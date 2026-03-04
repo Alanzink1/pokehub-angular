@@ -1,59 +1,145 @@
-# Pokehub
+# ⚔️ PokeHub
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+Uma aplicação web inspirada no universo Pokémon que funciona como uma **Pokédex interativa**, permitindo montar equipes e simular batalhas no estilo clássico dos jogos de GameBoy.
 
-## Development server
+O projeto utiliza a **PokéAPI** para obter dados do universo Pokémon e explora recursos modernos do **Angular**, como **Signals** e **Computed**, para gerenciamento reativo de estado.
 
-To start a local development server, run:
+---
 
+## 🚀 Demonstração
+
+<img width="1599" height="776" alt="image" src="https://github.com/user-attachments/assets/d7e946da-0cc3-4122-83fa-cb3b0eab9b56" />
+
+Clique [aqui](https://pokehub-alanzink1s-projects.vercel.app/) para verificar online
+
+---
+
+## 🧠 Sobre o projeto
+
+O **PokeHub** nasceu como um desafio pessoal para explorar conceitos modernos do Angular enquanto recria uma experiência inspirada nos jogos clássicos de Pokémon.
+
+A ideia é permitir que o usuário:
+
+- Explore Pokémon através de uma Pokédex interativa
+- Monte uma equipe com até **6 Pokémon**
+- Escolha um adversário
+- Simule batalhas inspiradas nos jogos clássicos
+
+O projeto também serve como laboratório para estudar:
+
+- Arquitetura de aplicações Angular
+- Consumo de APIs públicas
+- Gerenciamento reativo de estado
+- Design inspirado em interfaces retrô
+
+---
+
+## ⚙️ Funcionalidades
+
+### Pokédex
+
+- Listagem de Pokémon
+- Consulta de dados da PokéAPI
+- Interface inspirada em Pokédex clássica
+
+### Montagem de equipe
+
+- Seleção de até **6 Pokémon**
+- Organização da equipe
+
+### Escolha de adversário
+
+- Seleção de Pokémon adversário
+
+### Sistema de batalha *(em desenvolvimento)*
+
+- Simulação de combate entre Pokémon
+- Lógica inspirada nos jogos clássicos
+
+---
+
+## 🧱 Tecnologias utilizadas
+
+- Angular
+- TypeScript
+- Angular Signals
+- Computed
+- PokéAPI
+- Vercel (deploy)
+
+---
+
+## 📦 Instalação
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/alanzink1/pokehub-angular
+```
+Entre na pasta do projeto:
+```bash
+cd pokehub-angular
+```
+Instale as dependências:
+```bash
+npm install
+```
+Execute o projeto:
 ```bash
 ng serve
 ```
+A aplicação estará disponível em:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+http://localhost:4200
+## 📂 Estrutura do projeto
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+public/
+src/
+ ├─ app/
+ │   ├─ components/
+ │   ├─ services/
+ │   ├─ pages/
 ```
+## 📡 API utilizada
 
-## Building
+Este projeto utiliza a API pública:
+https://pokeapi.co
 
-To build the project run:
+Ela fornece dados sobre:
 
-```bash
-ng build
-```
+Pokémon
+Habilidades
+Tipos
+Estatísticas
+Sprites
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🎯 Roadmap
 
-## Running unit tests
+ Tela de seleção de Pokémon ( Em andamento... )
+ Tela de organização da equipe ( Em andamento... )
+ Tela de escolha de adversário ( Em andamento... )
+ Sistema de batalha ( Em andamento... )
+ Animações estilo GameBoy ( Em andamento... )
+ Sistema de turnos ( Em andamento... )
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 📚 Aprendizados
 
-```bash
-ng test
-```
+Durante o desenvolvimento deste projeto foram explorados:
 
-## Running end-to-end tests
+Consumo de APIs REST
+Gerenciamento de estado com Angular Signals
+Organização de componentes Angular
+Modelagem de dados de APIs externas
+Criação de interfaces inspiradas em jogos clássicos
 
-For end-to-end (e2e) testing, run:
+## 👨‍💻 Autor
+Alan Rodrigues
 
-```bash
-ng e2e
-```
+GitHub
+https://github.com/alanzink1
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+LinkedIn
+https://linkedin.com/in/alanzink1
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+⭐ Contribuição
+Se você gostou do projeto, considere deixar uma ⭐ no repositório.
