@@ -1,9 +1,17 @@
-<div class="container-pokemon" [class.is-opened]="opened()">
-  @if (pokemon() && pokemon().sprites) {
-    <img
-      [src]="pokemon().sprites.versions?.['generation-v']?.['black-white']?.animated.front_default"
-      [alt]="pokemon().name">
-  } @else {
-    <img id="container-logo" src="/images/pokehub.png" alt="Pokéball">
-  }
+<div class="screen-border">
+  <div class="screen-glass" [class.is-opened]="opened()" (click)="onclick.emit()">
+    <div class="screen-content">
+      @if (pokemon() && pokemon().sprites) {
+        <img class="pkmn-animated"
+          [src]="pokemon().sprites.versions?.['generation-v']?.['black-white']?.animated.front_default || pokemon().sprites.front_default"
+          [alt]="pokemon().name">
+      } @else {
+        <div class="logo-wrapper">
+          <img class="logo-img" src="/images/pokehub.png" alt="Pokehub">
+          <p class="logo-sub">PRESS START</p>
+        </div>
+      }
+    </div>
+    <div class="scanlines"></div>
+  </div>
 </div>

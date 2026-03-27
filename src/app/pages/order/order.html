@@ -1,13 +1,45 @@
 <div id="background">
-  <div id="principal-container">
-    <app-order-pokemon-screen></app-order-pokemon-screen>
+  <div id="header-bar">
+    <button class="back-btn" (click)="backToPokedex()">← Pokédex</button>
+    <h2 class="page-title">
+      {{ isOpponentMode() ? 'Time Adversário' : 'Sua Equipe' }}
+    </h2>
+    <button
+      class="advance-btn"
+      [disabled]="activeTeam().length === 0"
+      (click)="advance()">
+      {{ isOpponentMode() ? 'Batalhar!' : 'Avançar →' }}
+    </button>
   </div>
 
-  <div id="background-list">
-    <app-order-pokemon></app-order-pokemon>
-    <app-order-pokemon></app-order-pokemon>
-    <app-order-pokemon></app-order-pokemon>
-    <app-order-pokemon></app-order-pokemon>
-    <app-order-pokemon></app-order-pokemon>
+  <div id="main-content">
+    <div id="principal-container">
+      <app-order-pokemon-screen [pokemon]="selectedPokemon()">
+      </app-order-pokemon-screen>
+    </div>
+
+    <div id="background-list">
+      @for (pokemon of activeTeam(); track pokemon.id; let i = $index) {
+        <app-order-pokemon
+          [pokemon]="pokemon"
+          [index]="i"
+          [isFirst]="i === 0"
+          [isLast]="i === activeTeam().length - 1"
+          [isSelected]="selectedIndex() === i"
+          (selectPokemon)="selectPokemon(i)"
+          (moveUp)="moveUp(i)"
+          (moveDown)="moveDown(i)"
+          (removePokemon)="removePokemon(i)"
+          (changeLevel)="changeLevel(i, $event)">
+        </app-order-pokemon>
+      }
+
+      @if (activeTeam().length === 0) {
+        <div class="empty-team">
+          <p>Seu time está vazio!</p>
+          <button class="back-btn" (click)="backToPokedex()">← Voltar à Pokédex</button>
+        </div>
+      }
+    </div>
   </div>
 </div>

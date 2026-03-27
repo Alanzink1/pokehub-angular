@@ -1,0 +1,70 @@
+<div id="background">
+  <div id="header-bar">
+    <button class="back-btn" (click)="backToOrder()">← Equipe</button>
+    <h2 class="page-title">Modo de Batalha</h2>
+    <div class="team-preview">
+      @for (p of teamService.playerTeam(); track p.id) {
+        <img [src]="p.sprite" [title]="p.displayName" class="team-icon" />
+      }
+    </div>
+  </div>
+
+  <div id="content">
+    @if (!showOnlinePanel()) {
+      <div class="mode-cards">
+
+        <div class="mode-card offline-card" (click)="chooseOffline()">
+          <div class="card-icon"></div>
+          <h3>Offline</h3>
+          <p>Jogue contra um adversário no mesmo dispositivo.</p>
+          <p class="card-sub">Você irá escolher o time adversário na Pokédex.</p>
+          <button class="card-btn">Jogar Offline</button>
+        </div>
+
+        <div class="mode-card online-card">
+          <div class="card-icon"></div>
+          <h3>Online</h3>
+          <p>Desafie um amigo compartilhando um link de batalha!</p>
+          <p class="card-sub">Seu amigo montará o time dele e batalha começa.</p>
+          <button class="card-btn disabled">EM BREVE</button>
+        </div>
+
+      </div>
+    } @else {
+      <div class="online-panel">
+        <div class="online-header">
+          <div class="card-icon"></div>
+          <h3>Batalha Online</h3>
+          <p>Compartilhe este link com seu adversário:</p>
+        </div>
+
+        <div class="link-box">
+          <span class="link-text">{{ battleLink() }}</span>
+          <button class="copy-btn" (click)="copyLink()">
+            {{ onlineLinkCopied() ? 'Copiado!' : 'Copiar Link' }}
+          </button>
+        </div>
+
+        <div class="online-instructions">
+          <div class="step">
+            <span class="step-num">1</span>
+            <span>Envie o link para seu amigo</span>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <span>Seu amigo monta o time dele</span>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <span>Você pode batalhar contra uma equipe gerada!</span>
+          </div>
+        </div>
+
+        <div class="online-actions">
+          <button class="start-btn" (click)="startBattleOnline()">Iniciar Batalha!</button>
+          <button class="back-link" (click)="showOnlinePanel.set(false)">← Voltar</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

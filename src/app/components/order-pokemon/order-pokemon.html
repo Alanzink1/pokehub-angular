@@ -1,25 +1,54 @@
-<div id="poke-container">
-  <div id="poke-ball-container">
-    <img id="pokeball-img" src="/images/pokeball selected.png" alt="">
-    <img id="pokemon-img" src="images/bulbasaur.png" alt="">
-  </div>
-  <div id="info-container">
-    <div class="text-container">
-      <p>Bulbasaur</p>
-      <p>Lv3</p>
-    </div>
-
-    <div id="container-hp">
-      <div id="background-hp">
-        <p id="hp-text">HP</p>
-        <div id="hp"></div>
+@if (pokemon()) {
+  <div class="pkmn-card" [class.selected]="isSelected()" (click)="selectPokemon.emit()">
+    <div class="card-left">
+      <div class="sprite-box">
+        <img [src]="pokemon()!.sprite" [alt]="pokemon()!.displayName">
       </div>
-      <p>13 / 13</p>
     </div>
+    
+    <div class="card-main">
+      <div class="card-header">
+        <span class="p-name">{{ pokemon()!.displayName }}</span>
+        <div class="level-control">
+          <span>Lv</span>
+          <input type="number" 
+                 [value]="pokemon()!.level" 
+                 min="1" max="100"
+                 (click)="$event.stopPropagation()"
+                 (change)="levelChanged($event)">
+        </div>
+      </div>
 
-    <div class="text-container">
-      <img class="up" src="/images/up.png" alt="">
-      <img class="down" src="/images/down.png" alt="">
+      <div class="hp-status">
+        <div class="hp-bar-outer">
+          <div class="hp-bar-inner" 
+               [style.width.%]="hpPercent()" 
+               [style.background]="hpBarColor()"></div>
+        </div>
+        <span class="hp-val">{{ pokemon()!.currentHp }}/{{ pokemon()!.maxHp }}</span>
+      </div>
+
+      <div class="card-footer">
+        <div class="type-chips">
+          @for (t of pokemon()!.types; track t) {
+            <span class="type-mini" [style.background]="typeColor(t)">{{ t }}</span>
+          }
+        </div>
+        
+        <div class="card-actions">
+          @if (!isFirst()) {
+            <button class="icon-btn" (click)="$event.stopPropagation(); moveUp.emit()">▲</button>
+          }
+          @if (!isLast()) {
+            <button class="icon-btn" (click)="$event.stopPropagation(); moveDown.emit()">▼</button>
+          }
+          <button class="icon-btn btn-del" (click)="$event.stopPropagation(); removePokemon.emit()">✕</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+} @else {
+  <div class="pkmn-card empty-card">
+    <span>SLOT VAZIO</span>
+  </div>
+}

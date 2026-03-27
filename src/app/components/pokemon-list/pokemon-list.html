@@ -1,22 +1,25 @@
+<div class="search-bar">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Buscar Pokémon..."
+    (input)="onSearch($event)"
+  />
+</div>
+
 <div class="container-list" (scroll)="onScroll($event)">
   <ul>
     @for (pokemon of pokemonList(); track pokemon.name) {
       <div
         class="poke-option"
-        [class.option-selected]="selectedPokemonName() === pokemon.name"
+        [class.option-selected]="isInTeam(pokemon.name)"
+        [class.option-full]="teamFull() && !isInTeam(pokemon.name)"
         (click)="pokemonSelected.emit(pokemon)"
       >
-        <img
-          src="images/arrow.png"
-          alt="arrow"
-          [class]="selectedPokemonName() === pokemon.name
-            ? 'arrow-icon-active'
-            : 'arrow-icon-inative'"
-        >
-
         <app-pokedex-pokemon-option
           [url]="pokemon.url"
-          [isActive]="selectedPokemonName() === pokemon.name">
+          [isActive]="isInTeam(pokemon.name)"
+          [selectionIndex]="getTeamIndex(pokemon.name)">
         </app-pokedex-pokemon-option>
       </div>
     }

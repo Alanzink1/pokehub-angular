@@ -1,7 +1,7 @@
 @if (showOrientationWarning()) {
   <div class="orientation-warning">
     <div class="orientation-warning-content">
-      <div class="orientation-icon">📱</div>
+      <div class="orientation-icon"></div>
       <h2>Gire seu dispositivo</h2>
       <p>Por favor, vire seu dispositivo para o modo horizontal para uma melhor experiência.</p>
     </div>
@@ -9,6 +9,13 @@
 }
 
 <header>
+  <button class="music-toggle" (click)="musicService.toggleMute()" [class.is-muted]="musicService.isMuted()" [attr.aria-label]="musicService.isMuted() ? 'Ativar som' : 'Desativar som'">
+    <div class="speaker-icon">
+      <div class="speaker-base"></div>
+      <div class="speaker-wave"></div>
+    </div>
+  </button>
+
   <div id="container-title">
     <img src="images/pokeball.png" alt="imagem de pokebola">
     <h2>Pokehub</h2>
@@ -29,17 +36,8 @@
       </a>
     </div>
     <div class="footer-center">
-      <!-- <p>* Escolha no mínimo 6 pokémon iniciais.</p> -->
     </div>
     <div class="footer-right">
-      <div class="shortcut">
-        <span class="key key--space">SPACE</span>
-        <p>Parar/Reproduzir música</p>
-      </div>
-      <div class="shortcut">
-        <span class="key">ENTER</span>
-        <p>Avançar</p>
-      </div>
     </div>
   </div>
 </footer>

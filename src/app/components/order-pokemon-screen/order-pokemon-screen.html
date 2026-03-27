@@ -1,4 +1,4 @@
-<div id="screen-container">
+<div id="screen-container" [style.border-color]="typeColor()">
   <div class="top-lights">
     <span></span>
     <span></span>
@@ -6,36 +6,69 @@
 
   <div class="screen-frame">
     <div class="screen">
-      <img class="scene-img" src="images/scene.jpg" alt="Fundo">
-      <img class="info-img" src="images/bulbasaur.png" alt="Bulbasaur">
+      <img class="scene-img" [src]="bgUrl()" alt="Fundo">
+      @if (pokemon()) {
+        <img class="info-img" [src]="pokemon()!.animatedSprite || pokemon()!.sprite" [alt]="pokemon()!.displayName">
+      }
     </div>
   </div>
 
-
   <div class="bottom">
-      <div class="big-button"></div>
+    <div class="big-button" [style.background]="typeColor()"></div>
+    <div class="grill">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-      <div class="grill">
-      <span></span>
-      <span></span>
-      <span></span>
+  @if (pokemon()) {
+    <div class="info-title">
+      <p id="p-title">{{ pokemon()!.displayName }}</p>
+      <p id="p-level">Lvl. {{ pokemon()!.level }}</p>
+    </div>
+    <hr [attr.color]="typeColor()">
+
+    <div class="info-hp-bar">
+      <span class="hp-label">HP</span>
+      <div class="hp-track">
+        <div class="hp-fill" [style.width.%]="hpPercent()" [style.background]="hpBarColor()"></div>
       </div>
-  </div>
+      <span class="hp-numbers">{{ pokemon()!.currentHp }}/{{ pokemon()!.maxHp }}</span>
+    </div>
 
+    <div class="info-types">
+      @for (type of pokemon()!.types; track type) {
+        <p class="type-badge" [style.background]="typeColor()">{{ type }}</p>
+      }
+    </div>
 
-  <div class="info-title">
-    <p id="p-title">Chikorita</p>
-    <p id="p-level">Lvl. 32</p>
-  </div>
-  <hr color="#082c79">
-  <div class="info-description">
-    <p id="p-description">Chikorita é um pequeno Pokémon do tipo Planta, conhecido por sua personalidade dócil, cor verde-claro e uma grande folha no topo da cabeça que exala um aroma doce e relaxante.</p>
-  </div>
-  <div class="info-types">
-    <p id="p-type">Grass</p>
-    <p id="p-type">Grass</p>
-  </div>
-  <div class="info-life">
-    <p id="p-life">HP 13/13</p>
-  </div>
+    <div class="info-stats">
+      <div class="stat">
+        <span class="stat-label">ATK</span>
+        <span class="stat-value">{{ pokemon()!.attack }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">DEF</span>
+        <span class="stat-value">{{ pokemon()!.defense }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">SPD</span>
+        <span class="stat-value">{{ pokemon()!.speed }}</span>
+      </div>
+    </div>
+
+    <div class="info-moves">
+      <p class="moves-title">Ataques:</p>
+      <div class="moves-grid">
+        @for (move of pokemon()!.moves; track move.name) {
+          <span class="move-chip" [style.border-color]="typeColor()">{{ move.displayName }}</span>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="no-pokemon">
+      <p>Selecione um Pokémon</p>
+    </div>
+  }
 </div>

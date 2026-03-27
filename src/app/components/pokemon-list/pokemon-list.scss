@@ -1,99 +1,84 @@
-.poke-option {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 5px 0 5px 3em;
-  border-radius: 12px;
-  align-items: center;
-  gap: 12px;
-  position: relative;
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
-.option-selected {
-  background: linear-gradient(
-    90deg,
-    #ff4425,
-    #ff8c3a
-  );
+.search-bar {
+  padding: 4px;
+  background: var(--gb-dark);
+  flex-shrink: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: var(--gb-screen-bg);
+  color: var(--gb-dark);
+  font-family: inherit;
+  font-size: 0.7rem;
+  outline: none;
 }
 
 .container-list {
-  height: 560px;
-  max-height: calc(420px * 9);
-  width: 130%;
+  flex: 1;
+  background: var(--gb-screen-bg);
+  border: 3px solid var(--gb-dark);
   overflow-y: auto;
+  padding: 4px;
+  min-height: 0;
 
   ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-}
-
-
-@media (max-width: 868px) and (orientation: landscape) {
-  :host {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    min-height: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .container-list {
-    flex: 1;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
-    min-height: 0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  .poke-option {
-    padding: 3px 0 3px 2em;
-    font-size: 0.8em;
-    min-height: 35px;
+    gap: 4px;
   }
 }
 
-.container-list::-webkit-scrollbar {
-  width: 10px;
+.poke-option {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.1s;
+  min-height: 52px;
+
+  &:hover {
+    background: rgba(0,0,0,0.05);
+  }
+
+  &.option-selected {
+    background: rgba(120, 200, 80, 0.1);
+  }
+
+  &.option-full {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-.container-list::-webkit-scrollbar-thumb {
-  background-color: #e9563d;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 2px #882a1a;
-  background-clip: padding-box;
-}
-
-.container-list::-webkit-scrollbar-track {
-  border: solid #90ace7 2px;
-  background: repeating-linear-gradient(
-    0deg,
-    #276d83,
-    #276d83 5px,
-    #1c4760 7px 9px
-  );
+.in-team-badge {
+  color: var(--gb-success);
+  font-weight: bold;
+  margin-left: auto;
+  font-size: 0.8rem;
 }
 
 .arrow-icon-active {
-  position: absolute;
-  left: 13px;
-  top: 23px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 }
 
 .arrow-icon-inative {
   display: none;
 }
 
+.container-list::-webkit-scrollbar { width: 8px; }
+.container-list::-webkit-scrollbar-track { background: #eee; }
+.container-list::-webkit-scrollbar-thumb { background: var(--gb-dark); border: 2px solid #eee; }

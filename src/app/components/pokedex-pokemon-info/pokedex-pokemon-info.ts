@@ -1,11 +1,10 @@
 import { Component, input, output, computed, inject, signal, effect } from '@angular/core';
 import { HttpDataClient } from '../../services/http-data-client';
-import { PokedexPokemonOption } from "../pokedex-pokemon-option/pokedex-pokemon-option";
 
 @Component({
   selector: 'app-pokedex-pokemon-info',
   standalone: true,
-  imports: [PokedexPokemonOption],
+  imports: [],
   templateUrl: './pokedex-pokemon-info.html',
   styleUrl: './pokedex-pokemon-info.scss',
 })
@@ -27,6 +26,14 @@ export class PokedexPokemonInfo {
   types = computed(() => this.pokemon()?.types ?? []);
   heightM = computed(() => ((this.pokemon()?.height ?? 0) / 10).toFixed(1));
   weightKg = computed(() => ((this.pokemon()?.weight ?? 0) / 10).toFixed(1));
+  
+  moves = computed(() => {
+    const rawMoves = this.pokemon()?.moves ?? [];
+    return rawMoves.slice(0, 12).map((m: any) => {
+      const name = m.move?.name ?? '???';
+      return name.split('-').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    });
+  });
 
   flavorText = computed(() => {
     const entries = this.species()?.flavor_text_entries ?? [];

@@ -25,6 +25,7 @@ export class PokedexPokemonOption {
 
   url = input<string>('');
   isActive = input<boolean>(false);
+  selectionIndex = input<number | null>(null);
 
   pokemon = signal<any | null>(null);
 

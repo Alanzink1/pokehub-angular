@@ -1,16 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* ─── Global Gameboy Framework ────────────────────────── */
 
-*{
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+:root {
+  /* Palette GBA / FireRed style */
+  --gb-bg: #80c0a0;           /* Background Green Case */
+  --gb-screen-bg: #f8f0d2;    /* Cream Screen Panel */
+  --gb-dark: #1a1a1a;         /* Dark Charcoal / Borders */
+  --gb-shadow: rgba(0,0,0,0.35);
+
+  --gb-primary: #f08030;      /* Fire Orange */
+  --gb-secondary: #4488e8;    /* Water Blue */
+  --gb-success: #78c850;      /* Grass Green */
+  --gb-danger: #c03028;       /* Danger Red */
+  --gb-gray: #a0a090;         /* Interface Gray */
+
+  --gb-border: 4px solid var(--gb-dark);
+  --gb-radius: 4px;
+  --gb-font: 'Press Start 2P', cursive;
+  --gb-font-alt: 'VT323', monospace; /* For smaller descriptive text */
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  image-rendering: pixelated; /* Crucial for retro feel */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  font-family: var(--gb-font);
+  background: var(--gb-bg);
+  color: var(--gb-dark);
   overflow: hidden;
+  line-height: 1.2;
 }
 
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--gb-screen-bg);
+  border-left: 2px solid var(--gb-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gb-dark);
+  border: 2px solid var(--gb-screen-bg);
+}
 
+/* Orientation Warning */
 body:has(.orientation-warning) {
   overflow: hidden !important;
   position: fixed !important;
@@ -18,21 +57,25 @@ body:has(.orientation-warning) {
   height: 100% !important;
 }
 
-
 @media (max-width: 868px) and (orientation: landscape) {
   html, body {
     height: 100vh;
     overflow: hidden;
     width: 100%;
   }
+}
 
-  body {
-    touch-action: pan-y;
-  }
+/* Common Classes */
+.gb-panel {
+  background: var(--gb-screen-bg);
+  border: var(--gb-border);
+  border-radius: var(--gb-radius);
+  box-shadow: 4px 4px 0 var(--gb-dark);
+  padding: 12px;
+}
 
-
-  .container-list {
-    touch-action: pan-y !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
+.pixel-text {
+  font-family: var(--gb-font);
+  text-transform: uppercase;
+  font-size: 0.8rem;
 }

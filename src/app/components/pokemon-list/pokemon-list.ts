@@ -9,19 +9,35 @@ import { PokedexPokemonOption } from '../pokedex-pokemon-option/pokedex-pokemon-
   templateUrl: './pokemon-list.html',
   styleUrl: './pokemon-list.scss',
 })
-
 export class PokemonList {
   pokemonList = input<any[]>([]);
   selectedPokemonName = input<string | undefined>('');
+  teamPokemonNames = input<string[]>([]);
+  teamFull = input<boolean>(false);
 
   nearEnd = output<void>();
   pokemonSelected = output<any>();
+  searchChanged = output<string>();
+
   private hasEmittedNearEnd = false;
   private readonly thresholdPx = 250;
 
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchChanged.emit(value);
+  }
+
+  isInTeam(pokemonName: string): boolean {
+    return this.teamPokemonNames().includes(pokemonName);
+  }
+
+  getTeamIndex(pokemonName: string): number | null {
+    const idx = this.teamPokemonNames().indexOf(pokemonName);
+    return idx >= 0 ? idx : null;
+  }
+
   onScroll(event: Event) {
     const el = event.target as HTMLElement;
-
     const distanceToBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
     const isNearBottom = distanceToBottom <= this.thresholdPx;
 

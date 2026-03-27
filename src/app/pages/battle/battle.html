@@ -1,0 +1,205 @@
+@if (loadingOpponent()) {
+  <div class="loading-screen bounce-pixel">
+    <div class="pokeball-spin">🔘</div>
+    <p>BUSCANDO ADVERSARIO...</p>
+  </div>
+} @else {
+  <div id="battle-container" [class.arena-shake]="arenaShake()">
+    @if (flashScreen()) {
+      <div class="flash-overlay" [style.background-color]="flashColor()"></div>
+    }
+
+    @if (phase() === 'pokemon-select') {
+      <div class="bench-ui">
+        <div class="bench-header">
+          <span class="ui-title">Escolha um Pokémon:</span>
+          <button class="btn-cancel" (click)="backToAction()">VOLTAR</button>
+        </div>
+        
+        <div class="bench-grid">
+          @for (p of playerTeamBattle(); track p.id; let i = $index) {
+            <div class="bench-card"
+                 [class.is-active]="p === playerActive()"
+                 [class.is-fainted]="p.currentHp <= 0"
+                 [class.cursor-active]="keyboardActive() && selectedBenchIndex() === i"
+                 (click)="p === playerActive() || p.currentHp <= 0 ? null : switchPokemon(i)">
+              
+              <div class="card-type-bg" [style.background]="typeColor(p.types[0])"></div>
+
+              <div class="pkmn-sprite">
+                <img [src]="p.sprite" [alt]="p.displayName">
+              </div>
+
+              <div class="pkmn-info">
+                <span class="pkmn-name">{{ p.displayName }} Lv.50</span>
+                <div class="pkmn-hp-bar">
+                  <div class="hp-fill" 
+                       [style.width.%]="(p.currentHp / p.maxHp) * 100"
+                       [style.background]="hpColor((p.currentHp / p.maxHp) * 100)"></div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <div id="arena" [class.shake]="arenaShake()">
+      <img class="arena-bg" [src]="arenaBgUrl()" alt="Arena Background">
+
+      @if (playerActive() && opponentActive()) {
+      <div class="info-panel enemy-panel">
+        <div class="info-header">
+          <span class="p-name">{{ opponentActive().displayName }}</span>
+          <span class="p-lvl">Lv{{ opponentActive().level }}</span>
+        </div>
+        <div class="hp-container">
+          <span class="hp-lbl">HP</span>
+          <div class="hp-track">
+            <div class="hp-fill"
+                 [style.width.%]="opponentHpPercent()"
+                 [style.background]="opponentHpColor()"></div>
+          </div>
+        </div>
+        <div class="type-row">
+          @for (t of opponentActive().types; track t) {
+            <span class="type-tag" [style.background]="typeColor(t)">{{ t }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="platform-container foe">
+        <div class="ground-ellipse"></div>
+        <div class="sprite-anchor" [class.attacking]="enemyState().attacking">
+          <img class="battle-sprite enemy-sprite"
+               [class.hurt]="enemyState().hurt"
+               [class.fainted]="enemyState().fainted"
+               [src]="opponentActive().animatedSprite || opponentActive().sprite"
+               [alt]="opponentActive().displayName">
+        </div>
+      </div>
+
+      <div class="info-panel player-panel">
+        <div class="info-header">
+          <span class="p-name">{{ playerActive().displayName }}</span>
+          <span class="p-lvl">Lv{{ playerActive().level }}</span>
+        </div>
+        <div class="hp-container">
+          <span class="hp-lbl">HP</span>
+          <div class="hp-track">
+            <div class="hp-fill"
+                 [style.width.%]="playerHpPercent()"
+                 [style.background]="playerHpColor()"></div>
+          </div>
+        </div>
+        <div class="hp-numbers">
+          {{ playerActive().currentHp }}/{{ playerActive().maxHp }}
+        </div>
+        <div class="type-row">
+          @for (t of playerActive().types; track t) {
+            <span class="type-tag" [style.background]="typeColor(t)">{{ t }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="platform-container player" [class.entering]="playerState().entering">
+        <div class="ground-ellipse"></div>
+        <div class="sprite-anchor" [class.attacking]="playerState().attacking">
+          <img class="battle-sprite player-sprite"
+               [class.hurt]="playerState().hurt"
+               [class.fainted]="playerState().fainted"
+               [src]="playerActive().backSprite || playerActive().sprite"
+               [alt]="playerActive().displayName">
+        </div>
+      </div>
+    }
+    </div>
+
+    <div id="battle-menu">
+
+      @if (phase() === 'action' && playerActive() && playerActive()!.currentHp > 0) {
+        <div class="prompt-text">
+          <p>O que {{ playerActive().displayName }} vai fazer?</p>
+        </div>
+        <div class="action-grid">
+          <button class="menu-button btn-fight"
+                  [class.cursor-active]="keyboardActive() && cursorIndex() === 0"
+                  (click)="selectFight()">LUTAR</button>
+          <button class="menu-button btn-pkmn"
+                  [class.cursor-active]="keyboardActive() && cursorIndex() === 1"
+                  (click)="onPokemon()">POKEMON</button>
+          <button class="menu-button btn-run"
+                  [class.cursor-active]="keyboardActive() && cursorIndex() === 3"
+                  (click)="flee()">FUGIR</button>
+        </div>
+      }
+
+      @if (phase() === 'move-select') {
+        <div class="move-grid">
+          @for (move of playerActive().moves; track move.name; let i = $index) {
+            <button class="move-button"
+                    [class.disabled]="move.currentPp <= 0"
+                    [class.cursor-active]="keyboardActive() && moveCursorIndex() === i"
+                    (click)="useMove(move)">
+              <div class="m-top">
+                <span class="m-name">{{ move.displayName }}</span>
+                <span class="m-type" [style.background]="typeColor(move.type)">{{ move.type }}</span>
+              </div>
+              <div class="m-pp">PP {{ move.currentPp }}/{{ move.pp }}</div>
+            </button>
+          }
+          <button class="menu-button btn-back" (click)="backToAction()">VOLTAR</button>
+        </div>
+      }
+
+      @if (phase() === 'processing' || phase() === 'intro') {
+        <div class="message-box" (click)="onMessageClick()">
+          <p class="msg-text">{{ displayedMessage() }}</p>
+          <span class="msg-cursor">▼</span>
+        </div>
+      }
+
+      @if (phase() === 'flee-confirm') {
+        <div class="prompt-text">
+          <p>Tem certeza que deseja fugir?</p>
+        </div>
+        <div class="action-grid">
+          <button class="menu-button btn-run"
+                  [class.cursor-active]="keyboardActive() && cursorIndex() === 0"
+                  (click)="confirmFlee()">SIM (FUGIR)</button>
+          <button class="menu-button btn-fight"
+                  [class.cursor-active]="keyboardActive() && cursorIndex() === 1"
+                  (click)="backToAction()">NÃO (FICAR)</button>
+        </div>
+      }
+    </div>
+
+    @if (phase() === 'game-over') {
+      <div class="game-over-overlay" [class.victory]="winner() === 'player'">
+        <div class="go-content">
+          <div class="go-icon"></div>
+          <h2 class="go-title">{{ winner() === 'player' ? 'VITÓRIA!' : 'DERROTA...' }}</h2>
+          <p class="go-subtitle">{{ winner() === 'player' ? 'Você é um mestre!' : 'Tente novamente.' }}</p>
+          <div class="go-actions">
+            <button class="menu-button btn-fight" (click)="restartBattle()">RECOMEÇAR</button>
+            <button class="menu-button btn-pkmn" (click)="goHome()">SAIR</button>
+          </div>
+        </div>
+      </div>
+    }
+
+    <div class="mobile-joystick">
+      <div class="d-pad">
+        <button class="d-btn up"    (click)="handleJoystick('up')">▲</button>
+        <button class="d-btn left"  (click)="handleJoystick('left')">◀</button>
+        <button class="d-btn right" (click)="handleJoystick('right')">▶</button>
+        <button class="d-btn down"  (click)="handleJoystick('down')">▼</button>
+        <div class="d-pad-center"></div>
+      </div>
+      <div class="action-buttons">
+        <button class="joy-btn btn-b" (click)="handleB()">B</button>
+        <button class="joy-btn btn-a" (click)="handleA()">A</button>
+      </div>
+    </div>
+  </div>
+}

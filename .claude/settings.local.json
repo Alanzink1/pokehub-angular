@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx ng:*)",
+      "Read(//c/Users/alan.silva/Documents/.claude/projects/c--Users-alan-silva-Documents-Baldevs-pokehub-pokehub-angular/**)"
+    ]
+  }
+}

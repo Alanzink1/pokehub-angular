@@ -1,47 +1,52 @@
-<div class="container-info"
-     [class.overlay]="opened()"
-     [class.appear]="pokemon() !== null"
-     [class.show]="opened()"
-     (click)="toggleTable()">
+<div class="container-info" [class.overlay]="opened()" [class.appear]="pokemon() !== null" [class.show]="opened()"
+  (click)="toggleTable()">
 
-  <div class="arrow-container" (click)="toggleTable(); $event.stopPropagation()">
-    <img src="/images/arrow.png" alt="arrow">
-  </div>
+  <div class="pokedex-body">
+    <div class="header-pokedex">
+      <div class="blue-light"></div>
+      <div class="lights">
+        <div class="red-light"></div>
+        <div class="yellow-light"></div>
+        <div class="green-light"></div>
+      </div>
+      <span class="pkmn-id">No. {{ pokemon()?.id }}</span>
+    </div>
 
-  <div class="header-info">
-    <app-pokedex-pokemon-option
-          [url]="pokeUrl()"
-          [isActive]="true">
-    </app-pokedex-pokemon-option>
-  </div>
+    <div class="screen-area">
+      <div class="screen-header">
+        <h2 class="pkmn-name">{{ pokemon()?.name }}</h2>
+        <div class="type-badges">
+          @for (type of types(); track type.type.name) {
+          <span class="type-tag" [class]="type.type.name">{{ type.type.name }}</span>
+          }
+        </div>
+      </div>
 
-  <div class="middle-info">
-    <div class="infos">
-      <p class="p-button">Tipo</p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <label>ALTURA</label>
+          <span>{{ heightM() }}m</span>
+        </div>
+        <div class="stat-item">
+          <label>PESO</label>
+          <span>{{ weightKg() }}kg</span>
+        </div>
+      </div>
 
-      <div class="container-types">
-        @for (type of types(); track type.type.name) {
-          <p class="p-value" [class]="type.type.name">{{ type.type.name }}</p>
-        }
+      <div class="moves-section">
+        <label class="section-label">MOVIMENTOS</label>
+        <div class="moves-list">
+          @for (move of moves(); track move) {
+          <span class="move-tag">{{ move }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="description-box">
+        <p>{{ flavorText() }}</p>
       </div>
     </div>
 
-    <div class="infos">
-      <p class="p-button">Altura</p>
-      <p>{{ heightM() }}m</p>
-    </div>
-
-    <div class="infos">
-      <p class="p-button">Peso</p>
-      <p>{{ weightKg() }}kg</p>
-    </div>
-  </div>
-
-  <div class="footer-info">
-    <div class="card-description">
-      <div></div>
-      <p>{{ flavorText() }}</p>
-      <div></div>
-    </div>
+    <div class="close-hint">CLIQUE PARA FECHAR</div>
   </div>
 </div>

@@ -1,126 +1,154 @@
-#background {
-  height: 100vh;
-  overflow-y: auto;
-}
-
-#background-list {
+.pkmn-card {
   display: flex;
-  flex-direction: column;
-  gap: 32px;  
-  padding: 32px 0;
-}
-
-#poke-container {
+  background: var(--gb-screen-bg);
+  border: 4px solid var(--gb-dark);
+  border-radius: 4px;
+  padding: 8px;
+  gap: 12px;
   cursor: pointer;
-  width: 120%;
-  max-width: 90vw;
-  height: 12vh;
+  transition: transform 0.1s, box-shadow 0.1s;
+  box-shadow: 4px 4px 0 var(--gb-dark);
+  margin-bottom: 8px;
+  font-family: var(--gb-font);
 
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  align-items: center;
-
-  background-color: #63c4f1;
-  border-radius: 120px 16px 16px 120px;
-  margin-left: 12vh;
-  margin-top: 3vh;
-
-  border: 3px solid red;
-
-  #poke-ball-container {
-    position: relative;
-    width: 8vh;
-    height: 10vh;
-    flex-shrink: 0;
-    left: 10px;
-    top: 6px;
+  &.selected {
+    background: #fff;
+    border-color: var(--gb-primary);
+    transform: scale(1.02);
+    z-index: 5;
   }
 
-  #pokemon-img {
-    position: absolute;
-    z-index: 2;
-    width: 28vh;
-    left: -12vh;
-    bottom: -8vh;
-    image-rendering: pixelated;
-    pointer-events: none;
-  }
-
-  #pokeball-img {
-    position: absolute;
-    z-index: 1;
-    width: 20vh;
-    height: 18vh;
-    left: -10vh;
-    bottom: -3vh;
-    pointer-events: none;
-  }
-
-  p {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: white;
-    margin: 0;
+  &.empty-card {
+    opacity: 0.5;
+    justify-content: center;
+    border-style: dashed;
+    font-size: 0.7rem;
+    padding: 20px;
   }
 }
 
-#info-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 24px;
-  padding-left: 24px;
+.card-left {
+  flex-shrink: 0;
 }
 
-.text-container {
+.sprite-box {
+  width: 64px;
+  height: 64px;
+  background: rgba(0,0,0,0.05);
+  border: 2px solid var(--gb-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+}
+
+.card-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-
-  &.arrows {
-    align-items: center;
-  }
-
-  .up,
-  .down {
-    width: 35px;
-    height: 30px;
-    cursor: pointer;
-    image-rendering: pixelated;
-  }
-}
-
-#container-hp {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 1.5vh;
   gap: 4px;
 }
 
-#background-hp {
-  width: 25vh;
-  height: 3.6vh;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  background-color: #000;
-  border-radius: 16px;
+  .p-name {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
 
+.level-control {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 8px;
+  gap: 4px;
+  font-size: 0.6rem;
+  background: var(--gb-dark);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 2px;
+
+  input {
+    width: 35px;
+    background: #fff;
+    border: none;
+    color: #000;
+    font-family: inherit;
+    font-size: 0.6rem;
+    text-align: center;
+    padding: 1px;
+  }
 }
 
-#hp-text {
-  color: rgb(223, 96, 45);
-  font-weight: bold;
+.hp-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-#hp {
-  height: 50%;
-  width: 100%;
-  background-color: rgb(100, 235, 23);
-  border: 2px solid white;
-  border-radius: 16px;
+.hp-bar-outer {
+  flex: 1;
+  height: 10px;
+  background: #333;
+  border: 2px solid var(--gb-dark);
+}
+
+.hp-bar-inner {
+  height: 100%;
+  transition: width 0.3s;
+}
+
+.hp-val {
+  font-size: 0.55rem;
+  color: #666;
+  font-family: var(--gb-font-alt);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.type-chips {
+  display: flex;
+  gap: 4px;
+}
+
+.type-mini {
+  font-size: 0.45rem;
+  padding: 2px 6px;
+  color: #fff;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  background: var(--gb-gray);
+  border: 2px solid var(--gb-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  padding: 0;
+
+  &:hover { background: #fff; }
+  &.btn-del { color: var(--gb-danger); }
 }

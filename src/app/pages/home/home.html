@@ -1,25 +1,70 @@
 <div id="background">
+  <div id="info-container">
+    <app-pokedex-pokemon-info
+      [pokemon]="selectedPokemon()"
+      [opened]="showTable"
+      (openedChange)="onInfoOpenedChange($event)">
+    </app-pokedex-pokemon-info>
+  </div>
+
   <div class="container">
-    <div id="info-container">
-      <app-pokedex-pokemon-info
-        [pokemon]="selectedPokemon()"
-        [opened]="showTable"
-        (openedChange)="onInfoOpenedChange($event)">
-      </app-pokedex-pokemon-info>
-    </div>
-
-
-
     <app-pokedex-screen
       [pokemon]="selectedPokemon()"
-      [opened]="showTable">
+      [opened]="showTable"
+      (onclick)="selectedPokemon() && (showTable = !showTable)">
     </app-pokedex-screen>
 
-    <app-pokemon-list
-      [pokemonList]="pokemonList"
-      [selectedPokemonName]="selectedPokemon()?.name"
-      (pokemonSelected)="selectPokemon($event)"
-      (nearEnd)="onNearEnd()">
-    </app-pokemon-list>
+    <div id="right-panel">
+      <div class="user-panel">
+        <span class="u-label">{{ isOpponentMode() ? 'ADVERSÁRIO:' : 'JOGADOR:' }}</span>
+        <input type="text" [value]="currentActiveName()" (change)="onUsernameChange($event)" maxlength="12" class="u-input">
+        <button class="back-btn" (click)="goBack()">REINICIAR</button>
+      </div>
+
+      <div class="mode-banner" [class.opponent-mode]="isOpponentMode() || !!teamService.pendingVsParam()">
+        @if (teamService.pendingVsParam()) {
+          <span>DESAFIO RECEBIDO! Monte seu time:</span>
+        } @else if (isOpponentMode()) {
+          <span>Selecionando time adversário</span>
+        } @else {
+          <span>Monte seu time</span>
+        }
+        <span class="team-count">{{ activeTeamNames().length }}/6</span>
+      </div>
+
+      <app-pokemon-list
+        [pokemonList]="displayList()"
+        [teamPokemonNames]="activeTeamNames()"
+        [selectedPokemonName]="selectedPokemon()?.name"
+        [teamFull]="isTeamFull()"
+        (pokemonSelected)="selectPokemon($event)"
+        (nearEnd)="onNearEnd()"
+        (searchChanged)="onSearch($event)">
+      </app-pokemon-list>
+
+      <div class="team-strip">
+        @for (slot of teamSlots(); track $index) {
+          <div
+            class="team-slot"
+            [class.filled]="slot !== null"
+            [title]="slot?.displayName ?? 'Vazio'"
+            (click)="slot && removeFromTeam($index)">
+            @if (slot) {
+              <img [src]="slot.sprite" [alt]="slot.displayName" />
+            } @else {
+              <span class="slot-number">{{ $index + 1 }}</span>
+            }
+          </div>
+        }
+      </div>
+
+      @if (canAdvance()) {
+        <button class="advance-btn" (click)="advance()">
+          {{ isOpponentMode() ? 'Ver equipe adversária' : 'Avançar' }} →
+        </button>
+      } @else {
+        <p class="hint-text">Clique em Pokémon para montar seu time!</p>
+      }
+    </div>
   </div>
 </div>

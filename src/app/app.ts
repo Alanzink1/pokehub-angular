@@ -1,6 +1,7 @@
-import { Component, HostListener, signal, OnInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
+import { Component, HostListener, signal, OnInit, OnDestroy, PLATFORM_ID, inject, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { MusicService } from './services/music.service';
 
 @Component({
   selector: 'app-root',
@@ -8,15 +9,12 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private audio?: HTMLAudioElement;
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+  public readonly musicService = inject(MusicService);
   private readonly platformId = inject(PLATFORM_ID);
 
   title = signal('pokehub');
   count = 0;
-  musics = ['pallet', 'welcome', 'gym'];
-  musicPlayed = false;
-
   showOrientationWarning = signal(false);
   private orientationCheckInterval?: any;
 
@@ -40,8 +38,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit() {
     if (!this.isBrowser || typeof window === 'undefined') return;
+  }
 
-    // this.toggleMusic();
+  @HostListener('document:click')
+  @HostListener('document:keydown')
+  startGlobalMusic() {
+    if (this.isBrowser) {
+      this.musicService.start();
+    }
   }
 
   ngOnDestroy() {
@@ -78,7 +82,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (event.code === 'Space') {
       event.preventDefault();
-      this.toggleMusic();
     }
 
     if (event.code === 'Enter') {
@@ -87,24 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   toggleMusic() {
-    if (!this.isBrowser || typeof window === 'undefined') return;
-
-    if (this.audio && this.musicPlayed) {
-      this.audio.pause();
-      this.musicPlayed = false;
-      return;
-    }
-
-    this.musicPlayed = true;
-
-    const randomIndex = Math.floor(Math.random() * this.musics.length);
-    const musicName = this.musics[randomIndex];
-
-    const AudioCtor = window.Audio; 
-    this.audio = new AudioCtor(`musics/${musicName}.mp3`);
-
-    this.audio.volume = 0.03;
-    this.audio.play().catch(() => {});
   }
 
   nextAction() {
